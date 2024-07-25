@@ -14,14 +14,14 @@ export default function Searchbar() {
   };
   return (
     <form
-      className="flex items-center justify-between flex-1 p-2 gap-4 rounded-lg bg-gray-100"
+      className="flex items-center justify-between flex-1 py-2 px-4 gap-4 rounded-lg bg-gray-100"
       onSubmit={handleSubmit}
     >
       <input
         type="text"
         name="name"
         placeholder="Search"
-        className="bg-transparent outline-none flex-1 text-black/60"
+        className="bg-transparent outline-none  flex-1 text-black/60"
       />
       <button className="cursor-pointer ">
         <Image src="/search.png" alt="search img" width={16} height={16} />

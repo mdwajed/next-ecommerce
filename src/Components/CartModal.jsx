@@ -11,6 +11,7 @@ export default function CartModal() {
         <div className="">Cart is empty</div>
       ) : (
         <div className="">
+            <h1 className="text-xl font-semibold my-3">Shopping Cart</h1>
           <div className="flex gap-6">
             <Image
               src="/logo.png"
@@ -28,7 +29,7 @@ export default function CartModal() {
                 </div>
                 <div className="font-bold text-base">$ 40.5</div>
               </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between font-bold text-base">
                 <h1>Qty : 1</h1>
                 <h1 className="text-green-900">Remove</h1>
               </div>
@@ -39,14 +40,14 @@ export default function CartModal() {
               <h1>Subtotal</h1>
               <h1>$ 40.5</h1>
             </div>
-            <h1>
+            <h1 className="hover:text-green-700">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit
               eum dolores at fugiat, sunt fuga exercitationem. Voluptatem itaque
               ad blanditiis!
             </h1>
           </div>
           <div className="flex justify-between mt-4">
-            <Button variant="outlined">Vie Cart</Button>
+            <Button variant="outlined">View Cart</Button>
             <Button variant="contained">Check Out</Button>
           </div>
         </div>
