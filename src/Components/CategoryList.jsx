@@ -9,9 +9,9 @@ export default function CategoryList() {
   return (
     <div className="px-4  mt-12 md:mt-24 overflow-x-scroll">
       <div className=" flex gap-4">
-      <Link href="/list?cat=test">
+        <Link href="/list?cat=test">
           <Card sx={{ width: 320 }}>
-            <AspectRatio maxHeight="200px " maxWidth="72px">
+            <AspectRatio height="200px " width="72px">
               <Image
                 src="https://i.ibb.co/XFHWJJP/lama7.jpg"
                 height={120}

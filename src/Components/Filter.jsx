@@ -2,8 +2,8 @@ import React from "react";
 
 export default function Filter() {
   return (
-    <div className="mt-6 flex justify-between">
-      <div className="flex gap-6">
+    <div className="mt-6 flex  justify-between">
+      <div className="flex flex-wrap gap-6">
         <select
           name="type"
           id=""
@@ -31,35 +31,30 @@ export default function Filter() {
           className="py-2 px-4 text-xs font-medium rounded-2xl bg-pink-200 border-none"
         >
           <option>Size</option>
-          <option value="physical">Physical</option>
-          <option value="digital">Digital</option>
         </select>
         <select
-          name="type"
+          name="color"
           id=""
           className="py-2 px-4 text-xs font-medium rounded-2xl bg-pink-200 border-none"
         >
-          <option>Type</option>
-          <option value="physical">Physical</option>
-          <option value="digital">Digital</option>
+          <option>Color</option>
+          <option value="physical">Test</option>
         </select>
         <select
-          name="type"
+          name="cat"
           id=""
           className="py-2 px-4 text-xs font-medium rounded-2xl bg-pink-200 border-none"
         >
-          <option>Type</option>
-          <option value="physical">Physical</option>
-          <option value="digital">Digital</option>
+          <option>Category</option>
+          <option value="physical">New Arrival</option>
+          <option value="digital">Popular</option>
         </select>
         <select
-          name="type"
+          name="filter"
           id=""
           className="py-2 px-4 text-xs font-medium rounded-2xl bg-pink-200 border-none"
         >
-          <option>Type</option>
-          <option value="physical">Physical</option>
-          <option value="digital">Digital</option>
+          <option>All Filters</option>
         </select>
       </div>
       <div>

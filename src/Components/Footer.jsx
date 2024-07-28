@@ -89,7 +89,7 @@ export default function Footer() {
         </div>
       </div>
       {/* BOTTOM */}
-      <div className="md:flex justify-between items-center mt-8"> 
+      <div className="md:flex justify-between items-center"> 
         <div className="mb-6 font-medium">
           <p>@ 2024 Next Shop</p>
         </div>
