@@ -1,49 +1,43 @@
 "use client";
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import Add from "@/Components/Add";
 export default function CustomiseProducts({
   productId,
   variants,
   productOptions,
 }) {
   const [selectedOptions, setSelectedOptions] = useState({});
+  const [selectedVariant, setSelectedVariant] = useState();
+
+  useEffect(() => {
+    const variant = variants.find((v) => {
+      const variantChoices = v.choices;
+      if (!variantChoices) return false;
+      return Object.entries(selectedOptions).every(
+        ([key, value]) => variantChoices[key] === value
+      );
+    });
+    setSelectedVariant(variant);
+  }, [selectedOptions, variants]);
 
   const handleOptionSelect = (option, choice) => {
     setSelectedOptions((prev) => ({ ...prev, [option]: choice }));
   };
   console.log(variants);
 
-  // const isVariantInStock = (choices) => {
-  //   return variants.some((variant) => {
-  //     const variantChoices = variant.choices;
-  //     if (!variantChoices) return false;
-
-  //     return (
-  //       Object.entries(choices).every(
-  //         ([key, value]) => variantChoices[key] === value
-  //       ) &&
-  //       variant.stock?.inStock &&
-  //       variant.stock?.quantity &&
-  //       variant.stock?.quantity > 0
-  //     );
-  //   });
-  // };
   const isVariantInStock = (choices) => {
-    console.log("Checking stock for choices:", choices);
     return variants.some((variant) => {
       const variantChoices = variant.choices;
       if (!variantChoices) return false;
 
-      const allChoicesMatch = Object.entries(choices).every(
-        ([key, value]) => variantChoices[key] === value
-      );
-
-      const inStock =
-        allChoicesMatch &&
+      return (
+        Object.entries(choices).every(
+          ([key, value]) => variantChoices[key] === value
+        ) &&
         variant.stock?.inStock &&
-        variant.stock?.quantity > 0;
-      console.log("Variant:", variant, "In Stock:", inStock);
-      return inStock;
+        variant.stock?.quantity &&
+        variant.stock?.quantity > 0
+      );
     });
   };
   console.log(selectedOptions);
@@ -106,8 +100,7 @@ export default function CustomiseProducts({
           </div>
         );
       })}
-    
+      <Add productId={productId} variantId={selectedVariant?._id ||"00000000-0000-0000-0000-000000000000"} stockNumber={selectedVariant?.stock?.quantity || 0}/>
     </div>
   );
 }
-

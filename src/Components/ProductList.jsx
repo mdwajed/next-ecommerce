@@ -13,16 +13,34 @@ const PRODUCT_PER_PAGE = 20;
 export default async function ProductList({ categoryId, limit, searchParams }) {
   console.log(searchParams);
   const wixClient = await wixClientServer();
-  const res = await wixClient.products
+  let productQuery = wixClient.products
     .queryProducts()
+    .startsWith("name", searchParams?.name || "")
     .eq("collectionIds", categoryId)
-    .limit(limit || PRODUCT_PER_PAGE)
-    .find();
-  console.log(res.items[0].price);
+    .hasSome("productType", [searchParams?.type || "physical", "digital"])
+    .gt("priceData.price", searchParams?.min || 0)
+    // .gt("priceData.price", searchParams?.minPrice || 0)
+    // .lt("priceData.price", searchParams?.maxPrice || 999999)
+    .lt("priceData.price", searchParams?.max || 999999)
+    .limit(limit || PRODUCT_PER_PAGE);
+  //  .find();
+  if (searchParams?.sort) {
+    const [sortType, sortBy] = searchParams.sort.split(" ");
+
+ 
+    if (sortType === "asc") {
+      productQuery = productQuery.ascending(sortBy);
+    } else if (sortType === "desc") {
+      productQuery = productQuery.descending(sortBy);
+    }
+  }
+
+  const res = await productQuery.find();
+  // console.log(res);
   return (
-    <div className="max-w-7xl mx-auto mt-12 md:mt-24">
-      <h1 className="text-2xl font-semibold my-8">Featured Products</h1>
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 ">
+    <div className="max-w-7xl mx-auto mt-6 md:mt-12">
+      {/* <h1 className="text-2xl font-semibold my-8">Featured Products</h1> */}
+      <div className=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 ">
         {res.items.map((product) => (
           <Link href={"/" + product.slug} key={product._id}>
             <Card className="w-70">
@@ -46,16 +64,9 @@ export default async function ProductList({ categoryId, limit, searchParams }) {
                     {product.name}
                   </Typography>
                   <Typography color="blue-gray" className="font-medium">
-                    ${product.price?.price || "N/A"}
+                    $ {product.priceData?.price || "N/A"}
                   </Typography>
                 </div>
-                {/* <Typography
-                  variant="small"
-                  color="gray"
-                  className="font-normal opacity-75"
-                >
-                  {product.description || "No description available."}
-                </Typography> */}
               </CardBody>
               <CardFooter className="pt-0">
                 <button className=" rounded-2xl ring-1 ring-wajed py-2 px-4 hover:bg-wajed hover:text-white">

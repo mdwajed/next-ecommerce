@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-export default function Add() {
+export default function Add({productId,variantId,stockNumber}) {
   const [quantity, setQuantity] = useState(1);
   // TEMPORARY
   const stock = 4;
@@ -33,7 +33,7 @@ export default function Add() {
             </button>
           </div>
           <div className="text-sm">
-            Only <span className="text-orange-500">4 items </span> left{" "}
+            Only <span className="text-orange-500">{stockNumber} items </span> left{" "}
             {"don't"} miss it
           </div>
         </div>

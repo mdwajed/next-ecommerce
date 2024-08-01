@@ -7,7 +7,7 @@ import NavIcons from "./NavIcons";
 
 export default function Navbar() {
   return (
-    <div className="h-20 px-4 md:px-8 lg:px-16 xl:32 2xl:64 relative">
+    <div className="max-w-7xl mx-auto h-20  relative">
       
       {/* mobile */}
       <div className="h-full flex items-center justify-between md:hidden">

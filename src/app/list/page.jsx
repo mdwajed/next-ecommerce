@@ -11,7 +11,7 @@ export default async function ListPage({ searchParams }) {
   );
   console.log(cat);
   return (
-    <div className="px-4 md:px-8 lg:16 xl:32 2xl:64 relative">
+    <div className="max-w-7xl mx-auto  relative">
       {/* CAMPAIGN */}
       <div className="bg-pink-50 hidden sm:flex justify-between h-64">
         <div className=" w-2/3 flex flex-col justify-center items-center gap-8">
@@ -35,7 +35,7 @@ export default async function ListPage({ searchParams }) {
       </div>
       <Filter />
       {/* PRODUCTS */}
-      <h1 className="text-xl font-semibold mt-12">Shows for You!</h1>
+      <h1 className="text-2xl  font-semibold mt-12">{cat?.collection?.name} for You!</h1>
       <Suspense fallback={"loading....."}>
         <ProductList
           categoryId={
