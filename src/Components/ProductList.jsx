@@ -9,7 +9,8 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { wixClientServer } from "@/lib/wixClientServer";
-const PRODUCT_PER_PAGE = 20;
+import Pagination from "./Pagination";
+const PRODUCT_PER_PAGE = 8;
 export default async function ProductList({ categoryId, limit, searchParams }) {
   console.log(searchParams);
   const wixClient = await wixClientServer();
@@ -19,15 +20,17 @@ export default async function ProductList({ categoryId, limit, searchParams }) {
     .eq("collectionIds", categoryId)
     .hasSome("productType", [searchParams?.type || "physical", "digital"])
     .gt("priceData.price", searchParams?.min || 0)
-    // .gt("priceData.price", searchParams?.minPrice || 0)
-    // .lt("priceData.price", searchParams?.maxPrice || 999999)
     .lt("priceData.price", searchParams?.max || 999999)
-    .limit(limit || PRODUCT_PER_PAGE);
+    .limit(limit || PRODUCT_PER_PAGE)
+    .skip(
+      searchParams?.page
+        ? parseInt(searchParams.page) * (limit || PRODUCT_PER_PAGE)
+        : 0
+    );
   //  .find();
   if (searchParams?.sort) {
     const [sortType, sortBy] = searchParams.sort.split(" ");
 
- 
     if (sortType === "asc") {
       productQuery = productQuery.ascending(sortBy);
     } else if (sortType === "desc") {
@@ -77,6 +80,11 @@ export default async function ProductList({ categoryId, limit, searchParams }) {
           </Link>
         ))}
       </div>
+      <Pagination
+        currentPage={res.currentPage || 0}
+        hasPrev={res.hasPrev()}
+        hasNext={res.hasNext()}
+      />
     </div>
   );
 }

@@ -19,13 +19,13 @@ export default async function Home() {
   return (
     <div className="">
       <Slider />
-      <Suspense fallback={<loading />}>
+      <Suspense fallback={"loading"}>
         <ProductList
           categoryId={process.env.NEXT_PUBLIC_CATEGORY_PRODUCTS_ID}
           limit={4}
         />
       </Suspense>
-      <Suspense fallback={<loading />}>
+      <Suspense fallback={"loading"}>
         <CategoryList />
       </Suspense>
       <NewProducts />

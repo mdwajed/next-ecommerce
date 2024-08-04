@@ -16,13 +16,16 @@
     "@mui/joy": "^5.0.0-beta.48",
     "@mui/material": "^5.16.4",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
+    "@wix/ecom": "^1.0.677",
+    "@wix/redirects": "^1.0.51",
     "@wix/sdk": "^1.12.8",
     "@wix/stores": "^1.0.168",
     "js-cookie": "^3.0.5",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
-    "styled-components": "^6.1.11"
+    "styled-components": "^6.1.11",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "eslint": "^8",
